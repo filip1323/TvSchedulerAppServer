@@ -74,7 +74,9 @@ public class UserInterface {
     public void changeUserName() {
 	User user = getCurrentUser();
 	String userName = (WebOptionPane.showInputDialog("Change name for " + user.getName()));
-	mainController.getUserActionController().changeUserName(user, userName);
+	if (!userName.equals("")) {
+	    mainController.getUserActionController().changeUserName(user, userName);
+	}
 	reloadUserTab();
     }
 
