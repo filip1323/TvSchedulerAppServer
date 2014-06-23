@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>560</x>
+      <y>300</y>
+      <w>360</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Runnable&gt;&gt;
+UserInterface
+--
+--
++addUser(user : User) : void
++removeUser(user : User) : void
++reloadUserTab() : void
++reloadClientTab() : void
++changeUserName() : void
++sendUserMessage() : void
++getUsersLog() : void
++reloadClientTab() : void
+//+reloadSettingsTab() : void
++reloadServerTab(status : ServerStatus) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>560</x>
+      <y>600</y>
+      <w>360</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>GraphicalUserInterface
+--
+--
++initComponents() : void
++reloadUserTab(macAddress : String,
+                           ipAddress : String,
+                           connectionTime: String)
++reloadClientTab(user : User) : void
++getUsersComboBoxModel() : DefaultComboBoxModel
++getUsersComboBox() : WebComboBox
++enableUserPanel() : void
++disableUserPanel() : void
++getServerSwitch() : WebSwitch
++getActiveWindow() : JWindow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>560</x>
+      <y>530</y>
+      <w>360</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ActionListener&gt;&gt;
+UserActionResponder</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>150</x>
+      <y>490</y>
+      <w>380</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>ServerController
+--
+-mainController : Controller
+--
++addConnectedUser(cnctn : Connection) : void
++removeDisconnectedUsers() : void
++processReceivedObject(obj : Object) : void
++setServerServiceState(status : ServerStatus) : void
+-processReceivedCourier(netCourier : NetCourier, cnctn : Connection) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>510</x>
+      <y>520</y>
+      <w>70</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;50;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>700</x>
+      <y>540</y>
+      <w>50</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;60</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>510</x>
+      <y>370</y>
+      <w>70</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>50;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>140</x>
+      <y>130</y>
+      <w>320</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Listener&gt;&gt;
+ServerService
+--
+--
+getStatus() : ServerStatus
+start() : void
+stop() : void
+sendTo(cnctn : Connection, object : Object) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>270</x>
+      <y>250</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>30;50;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>150</x>
+      <y>630</y>
+      <w>380</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>UserActionController
+--
+-mainController : Controller
+--
++restartServer() : void
++stopServer() : void
++startServer() : void
++changeUserName(user : User, name : String) : void
++sendMessageToUser(user : User, message : String) : void
++getLogs(user : User) : void
++updateClient() : void
++shutdown() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>140</x>
+      <y>300</y>
+      <w>400</w>
+      <h>520</h>
+    </coordinates>
+    <panel_attributes>Controller
+--
+--
++getServerController : ServerController
++getUserActionController : UserActionController
++getServerService() : ServerService
++getUserInterface() : UserInterface
++addUser(newUser : User) : void
++getConnectedUsers() : User[*]
++removeUser(user : User) : void
++getUserByName(name : String) : User
++getUserByConnection(cnctn : Connection) : User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>480</x>
+      <y>150</y>
+      <w>110</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enum&gt;&gt;
+ServerStatus
+--
+enabled
+disabled</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>610</x>
+      <y>130</y>
+      <w>310</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>User
+--
+--
++setMacAddress(macAddress : String) : void
++setUserName(userName : String) : void
++getConnection() : Connection
++getName() : String
++getIpAddress : String
++getConnectionTime() : String
++getMacAddress() : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>140</x>
+      <y>30</y>
+      <w>420</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Database
+--
+--
+changeUserName(macAddress : String, name : String) : void
+userExistsByMacAddress(macAddress : String) : boolean
+getUserNameByMacAddress(macAddress : String) : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>700</x>
+      <y>470</y>
+      <w>50</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;60</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>460</x>
+      <y>80</y>
+      <w>160</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>30;30;30;50;140;50;140;220</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>890</x>
+      <y>380</y>
+      <w>70</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;340;50;340;50;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>580</x>
+      <y>30</y>
+      <w>340</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Resources
+--
+--
+_+getAudioStream(name : String) : AudioInputStream_
+_+getStream(name : String) : Input Stream_
+_+getUrl(name : String) : URL_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>140</x>
+      <y>0</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Tv Scheduler Debug Server
+elementstyle=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
