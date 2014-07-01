@@ -29,12 +29,13 @@ public class ServerService {
     private Thread serverThread = null;
 
     public ServerService() {
+	com.esotericsoftware.minlog.Log.set(com.esotericsoftware.minlog.Log.LEVEL_NONE);
 	server = new Server(16384, 16384);
 	server.addListener(new Listener() {
 	    @Override
 	    public void connected(Connection cnctn) {
 		super.connected(cnctn);
-//		System.out.println("[SERVER]: CONNECTED: " + cnctn.getRemoteAddressTCP());
+		System.out.println("[SERVER]: CONNECTED: " + cnctn.getRemoteAddressTCP());
 		mainController.getServerController().addConnectedUser(cnctn);
 	    }
 
@@ -42,7 +43,7 @@ public class ServerService {
 	    public void received(Connection cnctn, Object object) {
 		super.received(cnctn, object);
 		if (!(object instanceof com.esotericsoftware.kryonet.FrameworkMessage)) {
-//		    System.out.println("[SERVER]: OBJECT RECEIVED: " + object.getClass());
+		    System.out.println("[SERVER]: OBJECT RECEIVED: " + object.getClass() + object);
 		    mainController.getServerController().processReceivedObject(object, cnctn);
 		}
 	    }
@@ -50,7 +51,7 @@ public class ServerService {
 	    @Override
 	    public void disconnected(Connection cnctn) {
 		super.disconnected(cnctn); //To change body of generated methods, choose Tools | Templates.
-//		System.out.println("[SERVER]: DISCONNECTED: " + cnctn.getRemoteAddressTCP());
+		System.out.println("[SERVER]: DISCONNECTED");
 		mainController.getServerController().removeDisconnectedUsers();
 	    }
 	});
@@ -86,6 +87,7 @@ public class ServerService {
 	    ex.printStackTrace();
 	}
 	mainController.getServerController().setServerServiceState(ServerStatus.enabled);
+	System.out.println("[SERVER]: ON");
     }
 
     public void stop() throws ServerAlreadyDisabled {
@@ -96,9 +98,11 @@ public class ServerService {
 	serverThread = null;
 	mainController.getServerController().setServerServiceState(ServerStatus.disabled);
 	mainController.getServerController().removeDisconnectedUsers();
+	System.out.println("[SERVER]: OFF");
     }
 
     public void sendTo(Connection cnctn, Object object) {
+	System.out.println("[SERVER]: OBJECT SEND: " + object.getClass() + ": \t" + object);
 	cnctn.sendTCP(object);
     }
 //</editor-fold>

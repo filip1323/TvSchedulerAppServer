@@ -7,6 +7,7 @@ package tvschedulerdebugserver;
 
 import com.esotericsoftware.kryonet.Connection;
 import java.util.ArrayList;
+import misc.Utils;
 import net.NetCourier;
 
 /**
@@ -27,9 +28,6 @@ public class ServerController {
     public void addConnectedUser(Connection cnctn) {
 	User newUser = new User(cnctn);
 	mainController.addUser(newUser);
-	NetCourier netCourier = new NetCourier();
-	netCourier.initialize("macAddress", null, NetCourier.Type.request);
-	cnctn.sendTCP(netCourier);
     }
 
     public void removeDisconnectedUsers() {
@@ -55,6 +53,8 @@ public class ServerController {
 	mainController.getUserInterface().setServerServiceStatus(status);
     }
 
+    private String updatePath = "../TvSchedulerApp/dist/";
+
     private void processReceivedCourier(NetCourier netCourier, Connection cnctn) {
 	switch (netCourier.getType()) {
 	    case respond:
@@ -63,6 +63,20 @@ public class ServerController {
 		    user.setUserName(Database.getInstance().getUserNameByMacAddress(netCourier.getBody()));
 		    user.setMacAddress(netCourier.getBody());
 		    mainController.getUserInterface().reloadUserTab();
+		}
+		break;
+	    case request:
+		if (netCourier.getHead().equals("clientHashcode")) {
+		    try {
+			String hashcode = Utils.Files.getMD5Checksum(updatePath + "TvSchedulerApp.jar");
+			NetCourier courier = new NetCourier();
+			courier.initialize("clientHashcode", hashcode, NetCourier.Type.respond);
+			mainController.getServerService().sendTo(cnctn, courier);
+
+		    } catch (Exception ex) {
+			ex.printStackTrace();
+		    }
+
 		}
 		break;
 	}
