@@ -64,7 +64,6 @@ public class ServerService {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="INTERFACE">
     public ServerStatus getStatus() {
 	if (serverThread == null || !serverThread.isAlive()) {
 	    return ServerStatus.disabled;
@@ -105,6 +104,5 @@ public class ServerService {
 	System.out.println("[SERVER]: OBJECT SEND: " + object.getClass() + ": \t" + object);
 	cnctn.sendTCP(object);
     }
-//</editor-fold>
 
 }

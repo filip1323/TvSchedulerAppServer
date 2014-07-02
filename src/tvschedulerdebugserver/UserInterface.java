@@ -8,7 +8,6 @@ package tvschedulerdebugserver;
 import com.alee.laf.optionpane.WebOptionPane;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.notification.WebNotificationPopup;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -50,8 +49,7 @@ public class UserInterface {
     public void addUser(User user) {
 	graphicalUserInterface.getUsersComboBoxModel().addElement(user);
 	graphicalUserInterface.enableUserPanel();
-	ImageIcon addUserIcon = new ImageIcon(Resources.getUrl("user-add.png"));
-	showNotification("User connected: " + user.getName(), addUserIcon);
+	showNotification("User connected: " + user.getName(), "user-add.png");
     }
 
     public void removeUser(User user) {
@@ -59,8 +57,7 @@ public class UserInterface {
 	if (graphicalUserInterface.getUsersComboBoxModel().getSize() == 0) {
 	    graphicalUserInterface.disableUserPanel();
 	}
-	ImageIcon removeUserIcon = new ImageIcon(Resources.getUrl("user-remove.png"));
-	showNotification("User disconnected: " + user.getName(), removeUserIcon);
+	showNotification("User disconnected: " + user.getName(), "user-remove.png");
     }
 
     public void reloadUserTab() {
@@ -96,12 +93,16 @@ public class UserInterface {
     }
 
 //</editor-fold>
-    private void showNotification(String msg, ImageIcon icon) {
+    public void showNotification(String msg, String iconName) {
 	WebNotificationPopup popup = new WebNotificationPopup();
 	popup.setContent(msg);
-	popup.setIcon(icon);
+	popup.setIcon(Resources.getImageIcon(iconName));
 	popup.setClickToClose(true);
 	NotificationManager.showNotification(graphicalUserInterface.getActiveWindow(), popup);
+    }
+
+    public void showNotification(WebNotificationPopup notification) {
+	NotificationManager.showNotification(graphicalUserInterface.getActiveWindow(), notification);
     }
 
     private User getCurrentUser() {

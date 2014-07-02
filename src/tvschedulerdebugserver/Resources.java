@@ -22,6 +22,7 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -64,6 +65,10 @@ public class Resources {
      */
     public static URL getUrl(String name) {
 	return ClassLoader.getSystemResource("resources/" + name);
+    }
+
+    public static ImageIcon getImageIcon(String name) {
+	return new ImageIcon(getUrl(name));
     }
 
 }

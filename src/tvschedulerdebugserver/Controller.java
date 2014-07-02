@@ -5,8 +5,14 @@
  */
 package tvschedulerdebugserver;
 
+import com.alee.managers.notification.NotificationListener;
+import com.alee.managers.notification.NotificationManager;
+import com.alee.managers.notification.NotificationOption;
+import com.alee.managers.notification.WebNotificationPopup;
 import com.esotericsoftware.kryonet.Connection;
 import java.util.ArrayList;
+import javax.swing.SwingConstants;
+import net.NetCourier;
 import user_exceptions.DebugError;
 
 /**
@@ -44,7 +50,6 @@ public class Controller {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="INTERFACE">
     public UserActionController getUserActionController() {
 	return userActionController;
     }
@@ -92,6 +97,36 @@ public class Controller {
 	}
 	throw new DebugError();
     }
-//</editor-fold>
+
+    void requestAuthorization(final Connection cnctn) {
+
+	User user = getUserByConnection(cnctn);
+	WebNotificationPopup notification = new WebNotificationPopup();
+	notification.setContent(user.getName() + " / " + user.getMacAddress() + " / " + user.getIpAddress() + " is asking for authorize");
+	//notification.setIcon(Resources.getImageIcon(".png"));
+	notification.setOptions(NotificationOption.yes, NotificationOption.no);
+	NotificationManager.setLocation(SwingConstants.SOUTH_WEST);
+
+	notification.addNotificationListener(new NotificationListener() {
+
+	    @Override
+	    public void accepted() {
+	    }
+
+	    @Override
+	    public void closed() {
+	    }
+
+	    @Override
+	    public void optionSelected(NotificationOption option) {
+		if (option.compareTo(option.yes) == 0) {
+		    NetCourier respondYesCourier = new NetCourier();
+		    respondYesCourier.initialize("", NetCourier.Type.respondAuth);
+		    getServerService().sendTo(cnctn, respondYesCourier);
+		}
+	    }
+	});
+	userInterface.showNotification(notification);
+    }
 
 }

@@ -7,8 +7,10 @@ package tvschedulerdebugserver;
 
 import com.esotericsoftware.kryonet.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import misc.Utils;
 import net.NetCourier;
+import net.file_manager.FileManager;
 
 /**
  *
@@ -24,7 +26,6 @@ public class ServerController {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="INTERFACE">
     public void addConnectedUser(Connection cnctn) {
 	User newUser = new User(cnctn);
 	mainController.addUser(newUser);
@@ -53,34 +54,53 @@ public class ServerController {
 	mainController.getUserInterface().setServerServiceStatus(status);
     }
 
-    private String updatePath = "../TvSchedulerApp/dist/";
+    private String updatePath = "..\\TvSchedulerApp\\dist\\";
 
-    private void processReceivedCourier(NetCourier netCourier, Connection cnctn) {
-	switch (netCourier.getType()) {
+    private void processReceivedCourier(NetCourier incomingCourier, Connection cnctn) {
+	switch (incomingCourier.getType()) {
 	    case respond:
-		if (netCourier.getHead().equals("macAddress")) {
+		if (incomingCourier.getHead().equals("macAddress")) {
 		    User user = mainController.getUserByConnection(cnctn);
-		    user.setUserName(Database.getInstance().getUserNameByMacAddress(netCourier.getBody()));
-		    user.setMacAddress(netCourier.getBody());
+		    user.setUserName(Database.getInstance().getUserNameByMacAddress(incomingCourier.getBody()));
+		    user.setMacAddress(incomingCourier.getBody());
 		    mainController.getUserInterface().reloadUserTab();
 		}
 		break;
 	    case request:
-		if (netCourier.getHead().equals("clientHashcode")) {
-		    try {
-			String hashcode = Utils.Files.getMD5Checksum(updatePath + "TvSchedulerApp.jar");
-			NetCourier courier = new NetCourier();
-			courier.initialize("clientHashcode", hashcode, NetCourier.Type.respond);
-			mainController.getServerService().sendTo(cnctn, courier);
-
-		    } catch (Exception ex) {
-			ex.printStackTrace();
-		    }
-
+		switch (incomingCourier.getHead()) {
+		    case "clientHashcode":
+			mainController.getUserInterface().showNotification(mainController.getUserByConnection(cnctn).getName() + " is checking app version", "dial.png");
+			try {
+			    String hashcode = Utils.Files.getMD5Checksum(updatePath + "TvSchedulerApp.jar");
+			    NetCourier courier = new NetCourier();
+			    courier.initialize("clientHashcode", hashcode, NetCourier.Type.respond);
+			    mainController.getServerService().sendTo(cnctn, courier);
+			} catch (Exception ex) {
+			    ex.printStackTrace();
+			}
+			break;
+		    case "applicationHashcodes":
+			mainController.getUserInterface().showNotification(mainController.getUserByConnection(cnctn).getName() + " is updating app version", "data-transfer-download.png");
+			HashMap<String, String> hashcodes = Utils.Files.getDirectoryListingHashcodes(updatePath, updatePath + "\\\\");
+			for (String key : hashcodes.keySet()) {
+			    NetCourier hash = new NetCourier();
+			    hash.initialize(key, hashcodes.get(key), NetCourier.Type.hashcode);
+			    mainController.getServerService().sendTo(cnctn, hash);
+			}
+			NetCourier finalCourier = new NetCourier();
+			finalCourier.initialize("hashcodesSended", NetCourier.Type.respond);
+			mainController.getServerService().sendTo(cnctn, finalCourier);
+			break;
 		}
 		break;
+	    case requestFile:
+		FileManager.getInstance().sendFile(updatePath + incomingCourier.getHead(), incomingCourier.getHead(), cnctn);
+		break;
+	    case requestAuth:
+		mainController.requestAuthorization(cnctn);
+		break;
+
 	}
     }
-    //</editor-fold>
 
 }
