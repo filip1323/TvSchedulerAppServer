@@ -15,7 +15,7 @@ import com.alee.managers.notification.WebNotificationPopup;
  */
 public class UserInterface {
 
-    //<editor-fold defaultstate="collapsed" desc="INIT">
+    //<editor--fold defaultstate="collapsed" desc="INIT">
     private GraphicalUserInterface graphicalUserInterface;
     private Controller mainController;
 
@@ -28,8 +28,8 @@ public class UserInterface {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="INTERFACE">
-    //<editor-fold defaultstate="collapsed" desc="SERVER TAB">
+    //<editor--fold defaultstate="collapsed" desc="INTERFACE">
+    //<editor--fold defaultstate="collapsed" desc="SERVER TAB">
     public ServerStatus getServerState() {
 	if (graphicalUserInterface.getServerSwitch().isSelected()) {
 	    return ServerStatus.enabled;
@@ -45,7 +45,7 @@ public class UserInterface {
     }
 
 //</editor-fold>
-    //<editor-fold defaultstate="collapsed" desc="USER TAB">
+    //<editor--fold defaultstate="collapsed" desc="USER TAB">
     public void addUser(User user) {
 	graphicalUserInterface.getUsersComboBoxModel().addElement(user);
 	graphicalUserInterface.enableUserPanel();

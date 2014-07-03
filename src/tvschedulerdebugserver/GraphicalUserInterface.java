@@ -38,7 +38,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class GraphicalUserInterface {
 
-    //<editor-fold defaultstate="collapsed" desc="INIT">
+    //<editor--fold defaultstate="collapsed" desc="INIT">
     private UserActionResponder userActionResponder;
 
     public GraphicalUserInterface() {
@@ -54,7 +54,7 @@ public class GraphicalUserInterface {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="GUI CREATOR">
+    //<editor--fold defaultstate="collapsed" desc="GUI CREATOR">
     private GroupPanel contentGroupPanel;
     private JPanel contentPanel;
     private GroupPanel userPanel;
@@ -181,7 +181,7 @@ public class GraphicalUserInterface {
 	showUI();
     }
 
-    //<editor-fold defaultstate="collapsed" desc="old jframe version">
+    //<editor--fold defaultstate="collapsed" desc="old jframe version">
     /* private void showUI() {
      //creating transparent jframe
      final JFrame windowContainer = new JFrame("");
@@ -265,7 +265,7 @@ public class GraphicalUserInterface {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="INTERFACE">
+    //<editor--fold defaultstate="collapsed" desc="INTERFACE">
     public void reloadUserTab(String macAddress, String ipAddress, String connectionTime) {
 	TooltipManager.removeTooltips(usersMacAddressLabel);
 	TooltipManager.removeTooltips(usersIpAddressLabel);

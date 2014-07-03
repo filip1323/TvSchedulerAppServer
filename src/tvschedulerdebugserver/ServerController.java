@@ -18,7 +18,7 @@ import net.file_manager.FileManager;
  */
 public class ServerController {
 
-    //<editor-fold defaultstate="collapsed" desc="INIT">
+    //<editor--fold defaultstate="collapsed" desc="INIT">
     private Controller mainController;
 
     public void assignMainController(Controller mainController) {

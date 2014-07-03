@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class UserActionResponder implements ActionListener {
 
-    //<editor-fold defaultstate="collapsed" desc="INIT">
+    //<editor--fold defaultstate="collapsed" desc="INIT">
     private Controller mainController;
     private UserInterface userInterface;
 

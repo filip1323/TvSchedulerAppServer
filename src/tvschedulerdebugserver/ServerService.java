@@ -21,7 +21,7 @@ import user_exceptions.ServerAlreadyEnabled;
  */
 public class ServerService {
 
-    //<editor-fold defaultstate="collapsed" desc="INIT">
+    //<editor--fold defaultstate="collapsed" desc="INIT">
     private Controller mainController;
 
     private Server server;

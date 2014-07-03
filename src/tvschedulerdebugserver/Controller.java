@@ -21,7 +21,7 @@ import user_exceptions.DebugError;
  */
 public class Controller {
 
-    //<editor-fold defaultstate="collapsed" desc="INIT">
+    //<editor--fold defaultstate="collapsed" desc="INIT">
     private ArrayList<User> usersConnected;
     private ServerController serverController;
     private ServerService serverService;
