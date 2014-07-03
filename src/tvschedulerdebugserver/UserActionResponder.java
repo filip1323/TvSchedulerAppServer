@@ -5,6 +5,7 @@
  */
 package tvschedulerdebugserver;
 
+import tvschedulerdebugserver.gui.UserInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

@@ -94,9 +94,12 @@ public class Database {
     public String getUserNameByMacAddress(String macAddress) {
 	String query = "SELECT * FROM `users` WHERE `macAddress`='" + macAddress + "';";
 	try {
-	    return db.query(query).getString("userName");
+	    String result = db.query(query).getString("userName");
+	    if (result == null) {
+		return null;
+	    }
 	} catch (SQLException ex) {
-	    ex.printStackTrace();
+	    //ex.printStackTrace();
 	}
 	return null;
     }

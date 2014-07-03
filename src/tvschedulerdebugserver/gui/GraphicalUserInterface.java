@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tvschedulerdebugserver;
+package tvschedulerdebugserver.gui;
 
 import com.alee.extended.button.WebSwitch;
 import com.alee.extended.panel.GroupPanel;
 import com.alee.extended.panel.GroupingType;
+import com.alee.extended.window.ComponentMoveAdapter;
 import com.alee.laf.WebLookAndFeel;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.label.WebLabel;
+import com.alee.laf.rootpane.WebFrame;
 import com.alee.laf.separator.WebSeparator;
 import com.alee.managers.popup.PopupWay;
 import com.alee.managers.popup.WebButtonPopup;
@@ -31,6 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.JWindow;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import tvschedulerdebugserver.UserActionResponder;
 
 /**
  *
@@ -115,8 +118,6 @@ public class GraphicalUserInterface {
 
 	userPanel = new GroupPanel(GroupingType.fillAll, 0, false, new GroupPanel(GroupingType.fillLast, usersComboLabel, usersComboBox), usersChangeNameButton, usersGetLogsButton, usersSendMessageButton, usersMacAddressLabel, usersIpAddressLabel, usersConnectionStatusLabel);
 	disableUserPanel();
-	//userPanel.setBorder(BorderFactory.createLineBorder(Color.red, 2, true));
-	//creating client tab
 	clientPopupButton = new WebButton("Client");
 	clientPopup = new WebButtonPopup(clientPopupButton, PopupWay.leftDown);
 	clientUpdateButton = new WebButton("Update");
@@ -157,27 +158,11 @@ public class GraphicalUserInterface {
 		new GroupPanel(GroupingType.fillAll, exitButton)
 	);
 	contentGroupPanel.setMargin(5);
-	    //-----------------------------FINAL-----------------------------//
+	//-----------------------------FINAL-----------------------------//
 
-	//setLayout(null);
-	//adding contentGroupPanel to windowContainer
 	contentPanel = new JPanel();
 	contentPanel.add(contentGroupPanel, this);
 	contentPanel.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
-    //	add(panel);
-	//	setUndecorated(true);
-	//
-	//	//making windowContainer visible
-	//	setVisible(true);
-	//
-	//	//making windowContainer non resizable
-	//	setResizable(false);
-	//
-	//	//maximizing windowContainer
-	//	setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-	//	this.setBackground(new Color(0, 0, 0, 0));
-
-	//
 	showUI();
     }
 
@@ -251,14 +236,25 @@ public class GraphicalUserInterface {
 	});
 
 	contentPanel.setBounds(new Rectangle(contentPanel.getPreferredSize()));
-
-	//setting ui location on screen
-	int xLocation = width - (int) contentPanel.getPreferredSize().getWidth();
-	int yLocation = height - (int) contentPanel.getPreferredSize().getHeight() - taskBarHeight;
-	contentPanel.setLocation(xLocation, yLocation);
-
-	//adding ui to windowContainer
-	windowContainer.add(contentPanel);
+//
+//	//setting ui location on screen
+//	int xLocation = width - (int) contentPanel.getPreferredSize().getWidth();
+//	int yLocation = height - (int) contentPanel.getPreferredSize().getHeight() - taskBarHeight;
+//	contentPanel.setLocation(xLocation, yLocation);
+//
+//	//adding ui to windowContainer
+//	windowContainer.add(contentPanel);
+	WebLookAndFeel.setDecorateFrames(true);
+	WebFrame frame = new WebFrame();
+	frame.add(contentPanel);
+	ComponentMoveAdapter.install(frame);
+	frame.setShowMinimizeButton(true);
+	frame.setShowMaximizeButton(false);
+	frame.setShowCloseButton(false);
+	frame.setTitle("Server");
+	frame.setResizable(false);
+	frame.pack();
+	frame.setVisible(true);
 
 	//showing ui
 	windowContainer.setVisible(true);

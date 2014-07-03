@@ -61,7 +61,8 @@ public class ServerController {
 	    case respond:
 		if (incomingCourier.getHead().equals("macAddress")) {
 		    User user = mainController.getUserByConnection(cnctn);
-		    user.setUserName(Database.getInstance().getUserNameByMacAddress(incomingCourier.getBody()));
+		    String userName = Database.getInstance().getUserNameByMacAddress(incomingCourier.getBody());
+		    user.setUserName(userName);
 		    user.setMacAddress(incomingCourier.getBody());
 		    mainController.getUserInterface().reloadUserTab();
 		}

@@ -6,6 +6,9 @@
 package tvschedulerdebugserver;
 
 import com.alee.managers.notification.NotificationManager;
+import tvschedulerdebugserver.gui.ConsoleGUI;
+import tvschedulerdebugserver.gui.GraphicalUserInterface;
+import tvschedulerdebugserver.gui.UserInterface;
 
 /**
  *
@@ -35,6 +38,9 @@ public class TvSchedulerDebugServer {
 	//create gui
 	GraphicalUserInterface gui = new GraphicalUserInterface();
 
+	//create console
+	ConsoleGUI console = new ConsoleGUI();
+
 	//create user action responder
 	UserActionResponder userActionResponder = new UserActionResponder();
 
@@ -50,6 +56,7 @@ public class TvSchedulerDebugServer {
 	serverService.assignMainController(mainController);
 
 	ui.assignGUI(gui);
+	ui.assignConsole(console);
 	ui.assignMainController(mainController);
 
 	gui.assignUserActionResponder(userActionResponder);
@@ -59,6 +66,7 @@ public class TvSchedulerDebugServer {
 
 	//init
 	gui.initComponents();
+	console.initComponents();
 
 	//setting notofications location
 	NotificationManager.setLocation(NotificationManager.SOUTH_WEST);

@@ -13,6 +13,7 @@ import com.esotericsoftware.kryonet.Connection;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import net.NetCourier;
+import tvschedulerdebugserver.gui.UserInterface;
 import user_exceptions.DebugError;
 
 /**
@@ -100,7 +101,7 @@ public class Controller {
 
     void requestAuthorization(final Connection cnctn) {
 
-	User user = getUserByConnection(cnctn);
+	final User user = getUserByConnection(cnctn);
 	WebNotificationPopup notification = new WebNotificationPopup();
 	notification.setContent(user.getName() + " / " + user.getMacAddress() + " / " + user.getIpAddress() + " is asking for authorize");
 	//notification.setIcon(Resources.getImageIcon(".png"));
@@ -123,10 +124,12 @@ public class Controller {
 		    NetCourier respondYesCourier = new NetCourier();
 		    respondYesCourier.initialize("", NetCourier.Type.respondAuth);
 		    getServerService().sendTo(cnctn, respondYesCourier);
+		    userInterface.showNotification(user.getName() + " acces granted", "lock-unlocked.png");
 		}
 	    }
 	});
 	userInterface.showNotification(notification);
+	userInterface.showNotification(user.getName() + " / " + user.getMacAddress() + " / " + user.getIpAddress() + " is asking for authorize", "lock-locked.png");
     }
 
 }
