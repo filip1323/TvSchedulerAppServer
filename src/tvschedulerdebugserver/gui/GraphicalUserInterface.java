@@ -63,6 +63,7 @@ public class GraphicalUserInterface {
     private WebButton usersChangeNameButton;
     private WebButton usersGetLogsButton;
     private WebButton usersSendMessageButton;
+    private WebButton usersDeauthorizeButton;
     private WebLabel usersMacAddressLabel;
     private WebLabel usersIpAddressLabel;
     private WebLabel usersConnectionStatusLabel;
@@ -99,6 +100,8 @@ public class GraphicalUserInterface {
 	usersGetLogsButton.addActionListener(userActionResponder);
 	usersSendMessageButton = new WebButton("Send message");
 	usersSendMessageButton.addActionListener(userActionResponder);
+	usersDeauthorizeButton = new WebButton("Deauthorize");
+	usersDeauthorizeButton.addActionListener(userActionResponder);
 
 	usersMacAddressLabel = new WebLabel("Mac address", WebLabel.RIGHT);
 	TooltipManager.setTooltip(usersMacAddressLabel, "00-19-66-90-45-CA", TooltipWay.left, 0);
@@ -107,7 +110,7 @@ public class GraphicalUserInterface {
 	usersConnectionStatusLabel = new WebLabel("Connected since", WebLabel.RIGHT);
 	TooltipManager.setTooltip(usersConnectionStatusLabel, "21:15", TooltipWay.left, 0);
 
-	userPanel = new GroupPanel(GroupingType.fillAll, 0, false, new GroupPanel(GroupingType.fillLast, usersComboLabel, usersComboBox), usersChangeNameButton, usersGetLogsButton, usersSendMessageButton, usersMacAddressLabel, usersIpAddressLabel, usersConnectionStatusLabel);
+	userPanel = new GroupPanel(GroupingType.fillAll, 0, false, new GroupPanel(GroupingType.fillLast, usersComboLabel, usersComboBox), usersChangeNameButton, usersGetLogsButton, usersSendMessageButton, usersDeauthorizeButton, usersMacAddressLabel, usersIpAddressLabel, usersConnectionStatusLabel);
 	disableUserPanel();
 
 	//creating server status tab
@@ -211,9 +214,10 @@ public class GraphicalUserInterface {
 	frame.setResizable(false);
 	frame.pack();
 	frame.setVisible(true);
+	frame.setAlwaysOnTop(true);
 
 	//showing ui
-	windowContainer.setVisible(true);
+	//windowContainer.setVisible(true);
     }
     //</editor-fold>
 

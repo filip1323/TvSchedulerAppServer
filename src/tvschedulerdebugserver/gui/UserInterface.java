@@ -36,6 +36,12 @@ public class UserInterface {
     }
     //</editor-fold>
 
+    public void deauthorize() {
+	User user = getCurrentUser();
+	mainController.deauthorize(user);
+	showNotification(user.getName() + " acces denied", "lock-locked.png");
+    }
+
     //<editor--fold defaultstate="collapsed" desc="INTERFACE">
     //<editor--fold defaultstate="collapsed" desc="SERVER TAB">
     public ServerStatus getServerState() {

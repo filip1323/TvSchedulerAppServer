@@ -5,9 +5,9 @@
  */
 package tvschedulerdebugserver;
 
-import tvschedulerdebugserver.gui.UserInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import tvschedulerdebugserver.gui.UserInterface;
 
 /**
  *
@@ -42,6 +42,9 @@ public class UserActionResponder implements ActionListener {
 		break;
 	    case "Send message":
 		userInterface.sendUserMessage();
+		break;
+	    case "Deauthorize":
+		userInterface.deauthorize();
 		break;
 	    case "Selection changed": //server state
 		if (userInterface.getServerState().equals(ServerStatus.enabled)) {

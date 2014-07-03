@@ -51,6 +51,12 @@ public class Controller {
     }
     //</editor-fold>
 
+    public void deauthorize(User user) {
+	NetCourier deauthCourier = new NetCourier();
+	deauthCourier.initialize("", NetCourier.Type.requestDeauth);
+	getServerService().sendTo(user.getConnection(), deauthCourier);
+    }
+
     public UserActionController getUserActionController() {
 	return userActionController;
     }
