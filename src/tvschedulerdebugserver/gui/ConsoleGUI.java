@@ -52,7 +52,6 @@ public class ConsoleGUI {
 	label.setMargin(5);
 	contentPanel.add(label);
 	frame.pack();
-
     }
 
 }

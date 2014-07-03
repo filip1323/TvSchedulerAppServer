@@ -15,8 +15,6 @@ import com.alee.laf.combobox.WebComboBox;
 import com.alee.laf.label.WebLabel;
 import com.alee.laf.rootpane.WebFrame;
 import com.alee.laf.separator.WebSeparator;
-import com.alee.managers.popup.PopupWay;
-import com.alee.managers.popup.WebButtonPopup;
 import com.alee.managers.tooltip.TooltipManager;
 import com.alee.managers.tooltip.TooltipWay;
 import java.awt.Color;
@@ -25,8 +23,6 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
@@ -70,12 +66,7 @@ public class GraphicalUserInterface {
     private WebLabel usersMacAddressLabel;
     private WebLabel usersIpAddressLabel;
     private WebLabel usersConnectionStatusLabel;
-    private GroupPanel clientPanel;
-    private WebButton clientPopupButton;
-    private WebButtonPopup clientPopup;
-    private WebButton clientUpdateButton;
-    private WebLabel clientUpdateDateLabel;
-    private WebLabel clientUpdateTimeLabel;
+
     private GroupPanel serverPanel;
     private WebLabel serverPanelLabel;
     private WebLabel serverStatusLabel;
@@ -118,16 +109,6 @@ public class GraphicalUserInterface {
 
 	userPanel = new GroupPanel(GroupingType.fillAll, 0, false, new GroupPanel(GroupingType.fillLast, usersComboLabel, usersComboBox), usersChangeNameButton, usersGetLogsButton, usersSendMessageButton, usersMacAddressLabel, usersIpAddressLabel, usersConnectionStatusLabel);
 	disableUserPanel();
-	clientPopupButton = new WebButton("Client");
-	clientPopup = new WebButtonPopup(clientPopupButton, PopupWay.leftDown);
-	clientUpdateButton = new WebButton("Update");
-	clientUpdateButton.addActionListener(userActionResponder);
-	clientUpdateDateLabel = new WebLabel("Updated: 22-06-14");
-	clientUpdateTimeLabel = new WebLabel("14:26", WebLabel.RIGHT);
-
-	clientPanel = new GroupPanel(0, false, clientUpdateButton, clientUpdateDateLabel, clientUpdateTimeLabel);
-	clientPanel.setMargin(5);
-	clientPopup.setContent(clientPanel);
 
 	//creating server status tab
 	serverPanelLabel = new WebLabel("Server");
@@ -154,7 +135,6 @@ public class GraphicalUserInterface {
 		new WebSeparator(),
 		new GroupPanel(GroupingType.fillAll, serverPanel),
 		new WebSeparator(),
-		new GroupPanel(GroupingType.fillAll, clientPopupButton),
 		new GroupPanel(GroupingType.fillAll, exitButton)
 	);
 	contentGroupPanel.setMargin(5);
@@ -210,30 +190,6 @@ public class GraphicalUserInterface {
 	windowContainer.setSize(width, height);
 	windowContainer.setBackground(new Color(0, 0, 0, 0));
 	windowContainer.setLayout(null);
-	windowContainer.addMouseListener(new MouseListener() {
-
-	    @Override
-	    public void mouseClicked(MouseEvent e) {
-		clientPopup.hidePopup();
-	    }
-
-	    @Override
-	    public void mouseEntered(MouseEvent e) {
-	    }
-
-	    @Override
-	    public void mouseExited(MouseEvent e) {
-		clientPopup.hidePopup();
-	    }
-
-	    @Override
-	    public void mousePressed(MouseEvent e) {
-	    }
-
-	    @Override
-	    public void mouseReleased(MouseEvent e) {
-	    }
-	});
 
 	contentPanel.setBounds(new Rectangle(contentPanel.getPreferredSize()));
 //
