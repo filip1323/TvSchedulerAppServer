@@ -217,7 +217,7 @@ public class GraphicalUserInterface {
 	frame.setAlwaysOnTop(true);
 
 	//showing ui
-	//windowContainer.setVisible(true);
+	windowContainer.setVisible(true);
     }
     //</editor-fold>
 

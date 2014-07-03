@@ -138,4 +138,9 @@ public class Controller {
 	userInterface.showNotification(user.getName() + " / " + user.getMacAddress() + " / " + user.getIpAddress() + " is asking for authorize", "lock-locked.png");
     }
 
+    void userInfo(Connection cnctn, String infoMsg) {
+	User user = getUserByConnection(cnctn);
+	getUserInterface().showNotification(user.getName() + ": " + infoMsg, "flash.png");
+    }
+
 }

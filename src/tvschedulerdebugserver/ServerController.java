@@ -64,6 +64,7 @@ public class ServerController {
 		    String userName = Database.getInstance().getUserNameByMacAddress(incomingCourier.getBody());
 		    user.setUserName(userName);
 		    user.setMacAddress(incomingCourier.getBody());
+
 		    mainController.getUserInterface().reloadUserTab();
 		}
 		break;
@@ -100,7 +101,9 @@ public class ServerController {
 	    case requestAuth:
 		mainController.requestAuthorization(cnctn);
 		break;
-
+	    case info:
+		mainController.userInfo(cnctn, incomingCourier.getHead());
+		break;
 	}
     }
 

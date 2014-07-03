@@ -96,8 +96,9 @@ public class Database {
 	try {
 	    String result = db.query(query).getString("userName");
 	    if (result == null) {
-		return null;
+		return macAddress;
 	    }
+	    return result;
 	} catch (SQLException ex) {
 	    //ex.printStackTrace();
 	}
