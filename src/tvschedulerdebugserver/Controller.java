@@ -110,7 +110,7 @@ public class Controller {
 	final User user = getUserByConnection(cnctn);
 	WebNotificationPopup notification = new WebNotificationPopup();
 	notification.setContent(user.getName() + " / " + user.getMacAddress() + " / " + user.getIpAddress() + " is asking for authorize");
-	//notification.setIcon(Resources.getImageIcon(".png"));
+	notification.setIcon(Resources.getImageIcon("key.png"));
 	notification.setOptions(NotificationOption.yes, NotificationOption.no);
 	NotificationManager.setLocation(SwingConstants.SOUTH_WEST);
 

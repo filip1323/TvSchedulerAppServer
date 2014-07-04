@@ -59,6 +59,7 @@ public class UserActionController {
     public void sendMessageToUser(User user, String message) {
 	NetCourier netCourier = new NetCourier();
 	netCourier.initialize(message, NetCourier.Type.message);
+	mainController.getUserInterface().showNotification("Message sent to " + user.getName() + ": " + message, "flash.png");
 	mainController.getServerService().sendTo(user.getConnection(), netCourier);
     }
 
