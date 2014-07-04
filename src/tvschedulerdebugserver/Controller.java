@@ -138,9 +138,10 @@ public class Controller {
 	userInterface.showNotification(user.getName() + " / " + user.getMacAddress() + " / " + user.getIpAddress() + " is asking for authorize", "lock-locked.png");
     }
 
-    void userInfo(Connection cnctn, String infoMsg) {
+    void userInfo(Connection cnctn, String timeLong, String infoMsg) {
 	User user = getUserByConnection(cnctn);
-	getUserInterface().showNotification(user.getName() + ": " + infoMsg, "flash.png");
+	getUserInterface().consoleOut(Long.parseLong(timeLong), user.getName() + ": " + infoMsg, "flash.png");
+	Database.getInstance().addLog(Long.parseLong(timeLong), user.getName(), infoMsg);
     }
 
 }

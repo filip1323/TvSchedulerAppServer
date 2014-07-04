@@ -8,6 +8,7 @@ package tvschedulerdebugserver.gui;
 import com.alee.laf.optionpane.WebOptionPane;
 import com.alee.managers.notification.NotificationManager;
 import com.alee.managers.notification.WebNotificationPopup;
+import misc.Utils;
 import tvschedulerdebugserver.Controller;
 import tvschedulerdebugserver.ServerStatus;
 import tvschedulerdebugserver.User;
@@ -108,12 +109,11 @@ public class UserInterface {
 
 //</editor-fold>
     public void showNotification(String msg, String iconName) {
-//	WebNotificationPopup popup = new WebNotificationPopup();
-//	popup.setContent(msg);
-//	popup.setIcon(Resources.getImageIcon(iconName));
-//	popup.setClickToClose(true);
-//	NotificationManager.showNotification(graphicalUserInterface.getActiveWindow(), popup);
-	console.addOutput(msg, iconName);
+	console.addOutput(Utils.DateManager.getCurrentDateTimeInMilis(), msg, iconName);
+    }
+
+    public void consoleOut(long time, String msg, String iconName) {
+	console.addOutput(time, msg, iconName);
     }
 
     public void showNotification(WebNotificationPopup notification) {

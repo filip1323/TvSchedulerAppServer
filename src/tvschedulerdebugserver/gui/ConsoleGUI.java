@@ -44,10 +44,10 @@ public class ConsoleGUI {
 	frame.setVisible(true);
     }
 
-    public void addOutput(String msg, String iconName) {
+    public void addOutput(long time, String msg, String iconName) {
 	ImageIcon icon = Resources.getImageIcon(iconName);
 	WebLabel label = new WebLabel();
-	label.setText(Utils.DateManager.getCurrentTime() + ": " + msg);
+	label.setText(Utils.DateManager.convertLongIntoTimeFormat(time) + ": " + msg);
 	label.setIcon(icon);
 	label.setMargin(5);
 	contentPanel.add(label);

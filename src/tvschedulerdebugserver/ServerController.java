@@ -102,7 +102,7 @@ public class ServerController {
 		mainController.requestAuthorization(cnctn);
 		break;
 	    case info:
-		mainController.userInfo(cnctn, incomingCourier.getHead());
+		mainController.userInfo(cnctn, incomingCourier.getHead(), incomingCourier.getBody());
 		break;
 	}
     }
